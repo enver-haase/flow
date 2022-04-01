@@ -21,6 +21,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import com.vaadin.flow.testutil.ChromeBrowserTest;
+import com.vaadin.testbench.TestBenchElement;
 
 public class MyThemeIT extends ChromeBrowserTest {
 
@@ -29,9 +30,9 @@ public class MyThemeIT extends ChromeBrowserTest {
         getDriver().get(getRootURL()
                 + "/view/com.vaadin.flow.uitest.ui.theme.MyComponentView");
 
-        WebElement element = findElement(By.tagName("my-component"));
+        TestBenchElement element = $("my-component").first();
         Assert.assertFalse(
-                findInShadowRoot(element, By.id("component")).isEmpty());
+                element.$("*").attributeContains("id", "component").exists());
     }
 
     @Test
